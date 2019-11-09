@@ -2,7 +2,7 @@
  * stm32f407xx.h
  *
  *  Created on: Nov 9, 2019
- *      Author: whenwhathuh
+ *      Author: Johnny Rutkowski
  */
 
 #ifndef INC_STM32F407XX_H_
