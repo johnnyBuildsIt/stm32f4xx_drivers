@@ -47,6 +47,7 @@
 #define GPIOI_BASEADDR				(AHB1PERIPH_BASEADDR + 0X2000)
 #define GPIOJ_BASEADDR				(AHB1PERIPH_BASEADDR + 0X2400)
 #define GPIOK_BASEADDR				(AHB1PERIPH_BASEADDR + 0X2800)
+#define RCC_BASEADDR				(AHB1PERIPH_BASEADDR + 0X3800)
 
 /*
  * Base addresses of peripherals which are hanging on APB1 bus
@@ -88,12 +89,45 @@ typedef struct {
 }GPIO_RegDef_t;
 
 typedef struct {
-
+	volatile uint32_t RCC_CR;
+	volatile uint32_t RCC_PLLCFGR;
+	volatile uint32_t RCC_CFGR;
+	volatile uint32_t RCC_CIR;
+	volatile uint32_t RCC_AHB1RSTR;
+	volatile uint32_t RCC_AHB2RSTR;
+	volatile uint32_t RCC_AHB3RSTR;
+	uint32_t		  RESERVED0;
+	volatile uint32_t RCC_APB1RSTR;
+	volatile uint32_t RCC_APB2RSTR;
+	uint32_t		  RESERVED1;
+	uint32_t		  RESERVED2;
+	volatile uint32_t RCC_AHB1ENR;
+	volatile uint32_t RCC_AHB2ENR;
+	volatile uint32_t RCC_AHB3ENR;
+	uint32_t		  RESERVED3;
+	volatile uint32_t RCC_APB1ENR;
+	volatile uint32_t RCC_APB2ENR;
+	uint32_t		  RESERVED4;
+	uint32_t		  RESERVED5;
+	volatile uint32_t RCC_AHB1LPENR;
+	volatile uint32_t RCC_AHB2LPENR;
+	volatile uint32_t RCC_AHB3LPENR;
+	uint32_t		  RESERVED6;
+	volatile uint32_t RCC_APB1LPENR;
+	volatile uint32_t RCC_APB2LPENR;
+	uint32_t		  RESERVED7;
+	uint32_t		  RESERVED8;
+	volatile uint32_t RCC_BDCR;
+	volatile uint32_t RCC_CSR;
+	uint32_t		  RESERVED9;
+	uint32_t		  RESERVED10;
+	volatile uint32_t RCC_SSCGR;
+	volatile uint32_t RCC_PLLI2SCFGR;
 }RCC_RegDef_t;
 
 
 /*************Peripheral Definitions***********/
-/*peripheral base addresses type casted to xxx_RegDrf_t*/
+/*peripheral base addresses type casted to xxx_RegDef_t*/
 
 #define GPIOA		((GPIO_RegDef_t*) GPIOA_BASEADDR)
 #define GPIOB		((GPIO_RegDef_t*) GPIOB_BASEADDR)
@@ -106,6 +140,7 @@ typedef struct {
 #define GPIOI		((GPIO_RegDef_t*) GPIOI_BASEADDR)
 #define GPIOJ		((GPIO_RegDef_t*) GPIOJ_BASEADDR)
 #define GPIOK		((GPIO_RegDef_t*) GPIOK_BASEADDR)
+#define RCC			((RCC_RegDef_t*) RCC_BASEADDR)
 
 
 #endif /* INC_STM32F407XX_H_ */
