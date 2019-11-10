@@ -75,17 +75,38 @@
 /*************Peripheral Register Definition Structures***********/
 
 typedef struct {
-	volatile uint32_t MODER;
-	volatile uint32_t OTYPER;
-	volatile uint32_t OSPEEDR;
-	volatile uint32_t PUPDR;
-	volatile uint32_t IDR;
-	volatile uint32_t ODR;
-	volatile uint32_t BSRR;
-	volatile uint32_t LCKR;
-	volatile uint32_t AFRL;
-	volatile uint32_t AFRH;
+	volatile uint32_t MODER;		// offset 0x00
+	volatile uint32_t OTYPER;		// offset 0x04
+	volatile uint32_t OSPEEDR;		// offset 0x08
+	volatile uint32_t PUPDR;		// offset 0x0C
+	volatile uint32_t IDR;			// offset 0x10
+	volatile uint32_t ODR;			// offset 0x14
+	volatile uint32_t BSRR;			// offset 0x18
+	volatile uint32_t LCKR;			// offset 0x1C
+	volatile uint32_t AFRL;			// offset 0x20
+	volatile uint32_t AFRH;			// offset 0x24
 }GPIO_RegDef_t;
+
+typedef struct {
+
+}RCC_RegDef_t;
+
+
+/*************Peripheral Definitions***********/
+/*peripheral base addresses type casted to xxx_RegDrf_t*/
+
+#define GPIOA		((GPIO_RegDef_t*) GPIOA_BASEADDR)
+#define GPIOB		((GPIO_RegDef_t*) GPIOB_BASEADDR)
+#define GPIOC		((GPIO_RegDef_t*) GPIOC_BASEADDR)
+#define GPIOD		((GPIO_RegDef_t*) GPIOD_BASEADDR)
+#define GPIOE		((GPIO_RegDef_t*) GPIOE_BASEADDR)
+#define GPIOF		((GPIO_RegDef_t*) GPIOF_BASEADDR)
+#define GPIOG		((GPIO_RegDef_t*) GPIOG_BASEADDR)
+#define GPIOH		((GPIO_RegDef_t*) GPIOH_BASEADDR)
+#define GPIOI		((GPIO_RegDef_t*) GPIOI_BASEADDR)
+#define GPIOJ		((GPIO_RegDef_t*) GPIOJ_BASEADDR)
+#define GPIOK		((GPIO_RegDef_t*) GPIOK_BASEADDR)
+
 
 #endif /* INC_STM32F407XX_H_ */
 
