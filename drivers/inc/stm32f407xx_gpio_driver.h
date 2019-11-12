@@ -33,4 +33,37 @@ typedef struct {
 }GPIO_Handle_t;
 
 
+/*
+ * APIs supported by this driver
+ * for more info, check function definitions
+ */
+
+void GPIO_Init(void);
+
+
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
