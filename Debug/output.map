@@ -66,6 +66,35 @@ Discarded input sections
  .text          0x0000000000000000        0x0 drivers/src/main.o
  .data          0x0000000000000000        0x0 drivers/src/main.o
  .bss           0x0000000000000000        0x0 drivers/src/main.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .group         0x0000000000000000        0xc drivers/src/stm32f407xx_gpio_driver.o
+ .text          0x0000000000000000        0x0 drivers/src/stm32f407xx_gpio_driver.o
+ .data          0x0000000000000000        0x0 drivers/src/stm32f407xx_gpio_driver.o
+ .bss           0x0000000000000000        0x0 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_info    0x0000000000000000       0x68 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_abbrev  0x0000000000000000       0x29 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_aranges
+                0x0000000000000000       0x18 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0x7c drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000      0xa66 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0x22 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0x87 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0x51 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0xef drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0x6a drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000      0x1df drivers/src/stm32f407xx_gpio_driver.o
+ .debug_macro   0x0000000000000000      0x168 drivers/src/stm32f407xx_gpio_driver.o
+ .debug_line    0x0000000000000000      0x38c drivers/src/stm32f407xx_gpio_driver.o
+ .debug_str     0x0000000000000000     0x44b1 drivers/src/stm32f407xx_gpio_driver.o
+ .comment       0x0000000000000000       0x7f drivers/src/stm32f407xx_gpio_driver.o
+ .ARM.attributes
+                0x0000000000000000       0x39 drivers/src/stm32f407xx_gpio_driver.o
  .text          0x0000000000000000       0x14 startup/startup_stm32.o
  .data          0x0000000000000000        0x0 startup/startup_stm32.o
  .bss           0x0000000000000000        0x0 startup/startup_stm32.o
@@ -234,6 +263,7 @@ LOAD /home/whenwhathuh/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-
 LOAD /home/whenwhathuh/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 LOAD /home/whenwhathuh/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
 LOAD drivers/src/main.o
+LOAD drivers/src/stm32f407xx_gpio_driver.o
 LOAD startup/startup_stm32.o
 LOAD startup/sysmem.o
 LOAD /home/whenwhathuh/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.16.0.201807130628/tools/compiler/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a
@@ -559,7 +589,7 @@ OUTPUT(stm32f4xx_drivers.elf elf32-littlearm)
  .debug_ranges  0x0000000000000000       0x10 drivers/src/main.o
  .debug_ranges  0x0000000000000010       0x20 startup/startup_stm32.o
 
-.debug_macro    0x0000000000000000     0x1048
+.debug_macro    0x0000000000000000     0x1072
  .debug_macro   0x0000000000000000       0x72 drivers/src/main.o
  .debug_macro   0x0000000000000072      0xa66 drivers/src/main.o
  .debug_macro   0x0000000000000ad8       0x22 drivers/src/main.o
@@ -568,16 +598,16 @@ OUTPUT(stm32f4xx_drivers.elf elf32-littlearm)
  .debug_macro   0x0000000000000bd2       0xef drivers/src/main.o
  .debug_macro   0x0000000000000cc1       0x6a drivers/src/main.o
  .debug_macro   0x0000000000000d2b      0x1df drivers/src/main.o
- .debug_macro   0x0000000000000f0a      0x13e drivers/src/main.o
+ .debug_macro   0x0000000000000f0a      0x168 drivers/src/main.o
 
 .debug_line     0x0000000000000000      0x3e9
  .debug_line    0x0000000000000000      0x36d drivers/src/main.o
  .debug_line    0x000000000000036d       0x7c startup/startup_stm32.o
 
-.debug_str      0x0000000000000000     0x42ce
- .debug_str     0x0000000000000000     0x42a4 drivers/src/main.o
-                                       0x43ff (size before relaxing)
- .debug_str     0x00000000000042a4       0x2a startup/startup_stm32.o
+.debug_str      0x0000000000000000     0x4352
+ .debug_str     0x0000000000000000     0x4328 drivers/src/main.o
+                                       0x4483 (size before relaxing)
+ .debug_str     0x0000000000004328       0x2a startup/startup_stm32.o
                                          0x72 (size before relaxing)
 
 .comment        0x0000000000000000       0x7e

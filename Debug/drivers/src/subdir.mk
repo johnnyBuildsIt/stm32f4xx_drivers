@@ -4,13 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../drivers/src/main.c 
+../drivers/src/main.c \
+../drivers/src/stm32f407xx_gpio_driver.c 
 
 OBJS += \
-./drivers/src/main.o 
+./drivers/src/main.o \
+./drivers/src/stm32f407xx_gpio_driver.o 
 
 C_DEPS += \
-./drivers/src/main.d 
+./drivers/src/main.d \
+./drivers/src/stm32f407xx_gpio_driver.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
