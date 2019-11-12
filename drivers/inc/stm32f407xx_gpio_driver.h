@@ -15,10 +15,10 @@
  */
 typedef struct {
 	uint8_t GPIO_PinNumber;
-	uint8_t GPIO_PinMode;
-	uint8_t GPIO_PinSpeed;
-	uint8_t GPIO_PinPuPdControl;
-	uint8_t GPIO_PinOPType;
+	uint8_t GPIO_PinMode;			// @GPIO_PIN_MODES
+	uint8_t GPIO_PinSpeed;			// @GPIO_PIN_SPEEDS
+	uint8_t GPIO_PinPuPdControl;	// @GPIO_PIN_PUPD
+	uint8_t GPIO_PinOPType;			// @GPIO_PIN_OUTPUT_TYPE
 	uint8_t GPIO_PinAltFunMode;
 }GPIO_PinConfig_t;
 
@@ -28,9 +28,37 @@ typedef struct {
  */
 
 typedef struct {
-	GPIO_RegDef_t *pGPIOBx; // pointer to hold the base address of the GPIO peripheral
+	GPIO_RegDef_t *pGPIOx; // base address of the GPIO peripheral
 	GPIO_PinConfig_t GPIO_PinConfig; // GPIO pin configuration settings
 }GPIO_Handle_t;
+
+// @GPIO_PIN_MODES
+// GPIO pin possible modes for MODER
+#define GPIO_MODE_INPUT 					0
+#define GPIO_MODE_OUTPUT 					1
+#define GPIO_MODE_ALTFN 					2
+#define GPIO_MODE_ANALOG 					3
+#define GPIO_MODE_FALLING_EDGE_TRIGGER		4
+#define GPIO_MODE_RISING_EDGE_TRIGGER		5
+#define GPIO_MODE_RISING_FALLING_TRIGGER 	6
+
+// @GPIO_PIN_OUTPUT_TYPE
+// GPIO possible output types for OTYPER
+#define GPIO_OP_TYPE_PP		0
+#define GPIO_OP_TYPE_OD		1
+
+// @GPIO_PIN_SPEEDS
+// GPIO possible output speeds for OSPEEDR
+#define GPIO_SPEED_LOW		0
+#define GPIO_SPEED_MEDIUM	1
+#define GPIO_SPEED_FAST		2
+#define GPIO_SPEED_HIGH		3
+
+// @GPIO_PIN_PUPD
+// GPIO possible pu/pd configs for PUPDR
+#define GPIO_NO_PUPD	0
+#define	GPIO_PU			1
+#define GPIO_PD			2
 
 
 /*

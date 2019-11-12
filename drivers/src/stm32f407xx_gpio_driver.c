@@ -19,11 +19,29 @@
  * Notes:
  */
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
+	uint32_t temp = 0;
+	uint8_t pinNumber = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber;
 
+	// 1. configure the mode of the gpio pin
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= 3){// non-interrupt mode
+		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pinNumber));
+		pGPIOHandle->pGPIOx->MODER = temp;
+	} else {
+		// interrupt mode
+		// TODO implement interrupt mode
+	}
+
+	// 2. configure speed
+
+	// 3. configure pupd (pull up/pull down
+
+	// 4. configure the optype (output type)
+
+	// 5. configure alt functionality
 }
 
 /*
- * Name:
+ * Name: GPIO_DeInit
  *
  * Description:
  *
@@ -59,66 +77,46 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t enOrDi){
 }
 
 void GPIO_PeriClockEnableHelper(GPIO_RegDef_t *pGPIOx){
-	switch (pGPIOx) {
-		case GPIOA:
-			GPIOA_PCLK_EN();
-			break;
-		case GPIOB:
-			GPIOB_PCLK_EN();
-			break;
-		case GPIOC:
-			GPIOC_PCLK_EN();
-			break;
-		case GPIOD:
-			GPIOD_PCLK_EN();
-			break;
-		case GPIOE:
-			GPIOD_PCLK_EN();
-			break;
-		case GPIOF:
-			GPIOF_PCLK_EN();
-			break;
-		case GPIOG:
-			GPIOG_PCLK_EN();
-			break;
-		case GPIOH:
-			GPIOH_PCLK_EN();
-			break;
-		case GPIOI:
-			GPIOI_PCLK_EN();
-			break;
+	if(pGPIOx == GPIOA) {
+		GPIOA_PCLK_EN();
+	} else if(pGPIOx == GPIOB) {
+		GPIOB_PCLK_EN();
+	} else if(pGPIOx == GPIOC) {
+		GPIOC_PCLK_EN();
+	} else if(pGPIOx == GPIOD) {
+		GPIOD_PCLK_EN();
+	} else if(pGPIOx == GPIOE) {
+		GPIOE_PCLK_EN();
+	} else if(pGPIOx == GPIOF) {
+		GPIOF_PCLK_EN();
+	} else if(pGPIOx == GPIOG) {
+		GPIOG_PCLK_EN();
+	} else if(pGPIOx == GPIOH) {
+		GPIOH_PCLK_EN();
+	} else if(pGPIOx == GPIOI) {
+		GPIOI_PCLK_EN();
 	}
 }
 
 void GPIO_PeriClockDisableHelper(GPIO_RegDef_t *pGPIOx){
-	switch(pGPIOx){
-		case GPIOA:
-			GPIOA_PCLK_DI();
-			break;
-		case GPIOB:
-			GPIOB_PCLK_DI();
-			break;
-		case GPIOC:
-			GPIOC_PCLK_DI();
-			break;
-		case GPIOD:
-			GPIOD_PCLK_DI();
-			break;
-		case GPIOE:
-			GPIOE_PCLK_DI();
-			break;
-		case GPIOF:
-			GPIOF_PCLK_DI();
-			break;
-		case GPIOG:
-			GPIOG_PCLK_DI();
-			break;
-		case GPIOH:
-			GPIOH_PCLK_DI();
-			break;
-		case GPIOI:
-			GPIOI_PCLK_DI();
-			break;
+	if(pGPIOx == GPIOA) {
+		GPIOA_PCLK_DI();
+	} else if(pGPIOx == GPIOB) {
+		GPIOB_PCLK_DI();
+	} else if(pGPIOx == GPIOC) {
+		GPIOC_PCLK_DI();
+	} else if(pGPIOx == GPIOD) {
+		GPIOD_PCLK_DI();
+	} else if(pGPIOx == GPIOE) {
+		GPIOE_PCLK_DI();
+	} else if(pGPIOx == GPIOF) {
+		GPIOF_PCLK_DI();
+	} else if(pGPIOx == GPIOG) {
+		GPIOG_PCLK_DI();
+	} else if(pGPIOx == GPIOH) {
+		GPIOH_PCLK_DI();
+	} else if(pGPIOx == GPIOI) {
+		GPIOI_PCLK_DI();
 	}
 }
 
