@@ -38,7 +38,16 @@ typedef struct {
  * for more info, check function definitions
  */
 
-void GPIO_Init(void);
+void GPIO_Init(GPIO_Handle_t *pGPIOHandle);
+void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);//use periph reset rcc register
+void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t enOrDi);// enable/disable clock for given base address
+uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t pinNumber);
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx);
+void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t pinNumber, uint8_t value);
+void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t value);
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t pinNumber);
+void GPIO_IRQConfig(uint8_t iRQNumber, uint8_t iRQPriority, uint8_t enOrDi);
+void GPIO_IRQHandling(uint8_t pinNumber);
 
 
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */

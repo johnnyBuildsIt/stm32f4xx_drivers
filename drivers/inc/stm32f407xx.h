@@ -183,6 +183,13 @@ typedef struct {
 #define GPIOB_PCLK_DI()			(RCC->AHB1ENR &= ~(1 << 1))
 
 
+// some generic macros
+#define ENABLE 		1
+#define DISABLE 	0
+#define SET 		ENABLE
+#define RESET 		DISABLE
+
+
 #endif /* INC_STM32F407XX_H_ */
 
 
