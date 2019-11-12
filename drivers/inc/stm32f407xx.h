@@ -140,7 +140,47 @@ typedef struct {
 #define GPIOI		((GPIO_RegDef_t*) GPIOI_BASEADDR)
 #define GPIOJ		((GPIO_RegDef_t*) GPIOJ_BASEADDR)
 #define GPIOK		((GPIO_RegDef_t*) GPIOK_BASEADDR)
+
 #define RCC			((RCC_RegDef_t*) RCC_BASEADDR)
+
+
+/*
+ * Clock enable macros for GPIOx peripherals
+ */
+
+#define GPIOA_PCLK_EN()			(RCC->AHB1ENR |= (1 << 0))
+#define GPIOB_PCLK_EN()			(RCC->AHB1ENR |= (1 << 1))
+
+/*
+ * Clock enable macros for I2Cx peripherals
+ */
+
+
+
+/*
+ * Clock enable macros for SPIx peripherals
+ */
+
+
+
+/*
+ * Clock enable macros for USARTx peripherals
+ */
+
+
+
+/*
+ * Clock enable macros for SYSCFGx peripherals
+ */
+
+
+
+/*
+ * Clock disable macros for GPIOx peripherals
+ */
+
+#define GPIOA_PCLK_DI()			(RCC->AHB1ENR &= ~(1 << 0))
+#define GPIOB_PCLK_DI()			(RCC->AHB1ENR &= ~(1 << 1))
 
 
 #endif /* INC_STM32F407XX_H_ */
