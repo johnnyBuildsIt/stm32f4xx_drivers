@@ -8,36 +8,46 @@
 #include "stm32f407xx_gpio_driver.h"
 
 /*
- * Name:
+ * Name: GPIO_Init
  *
- * Description:
+ * Description: TODO fill in description
  *
  * Parameters:
- *
- * Return:
+ * 		pGPIOHandle - a struct containing the base addr of a GPIO port
+ * 					  and the port config settings
+ * Return: void
  *
  * Notes:
  */
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
-	uint32_t temp = 0;
+	uint32_t registerState = 0;
 	uint8_t pinNumber = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber;
 
 	// 1. configure the mode of the gpio pin
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= 3){// non-interrupt mode
-		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pinNumber));
-		pGPIOHandle->pGPIOx->MODER = temp;
+		registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pinNumber));
+		pGPIOHandle->pGPIOx->MODER = registerState;
 	} else {
 		// interrupt mode
 		// TODO implement interrupt mode
 	}
 
 	// 2. configure speed
+	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pinNumber));
+	pGPIOHandle->pGPIOx->OSPEEDR = registerState;
 
 	// 3. configure pupd (pull up/pull down
+	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 * pinNumber));
+	pGPIOHandle->pGPIOx->PUPDR = registerState;
 
 	// 4. configure the optype (output type)
+	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << pinNumber);
+	pGPIOHandle->pGPIOx->OTYPER = registerState;
 
 	// 5. configure alt functionality
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN){
+		// configure alternate functiona registers
+	}
 }
 
 /*
@@ -70,13 +80,13 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx){
  */
 void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t enOrDi){
 	if(enOrDi == ENABLE) {
-		GPIO_PeriClockEnableHelper(pGPIOx);
+		enable_GPIO_Clk(pGPIOx);
 	} else {
-		GPIO_PeriClockDisableHelper(pGPIOx);
+		disable_GPIO_Clk(pGPIOx);
 	}
 }
 
-void GPIO_PeriClockEnableHelper(GPIO_RegDef_t *pGPIOx){
+void enable_GPIO_Clk(GPIO_RegDef_t *pGPIOx){
 	if(pGPIOx == GPIOA) {
 		GPIOA_PCLK_EN();
 	} else if(pGPIOx == GPIOB) {
@@ -98,7 +108,7 @@ void GPIO_PeriClockEnableHelper(GPIO_RegDef_t *pGPIOx){
 	}
 }
 
-void GPIO_PeriClockDisableHelper(GPIO_RegDef_t *pGPIOx){
+void disable_GPIO_Clk(GPIO_RegDef_t *pGPIOx){
 	if(pGPIOx == GPIOA) {
 		GPIOA_PCLK_DI();
 	} else if(pGPIOx == GPIOB) {
