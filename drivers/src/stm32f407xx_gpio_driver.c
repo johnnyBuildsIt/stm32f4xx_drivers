@@ -26,7 +26,7 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	// 1. configure the mode of the gpio pin
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= 3){// non-interrupt mode
 		registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pinNumber));
-		pGPIOHandle->pGPIOx->MODER = registerState;
+		pGPIOHandle->pGPIOx->MODER |= registerState;
 	} else {
 		// interrupt mode
 		// TODO implement interrupt mode
@@ -34,19 +34,19 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 
 	// 2. configure speed
 	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pinNumber));
-	pGPIOHandle->pGPIOx->OSPEEDR = registerState;
+	pGPIOHandle->pGPIOx->OSPEEDR |= registerState;
 
 	// 3. configure pupd (pull up/pull down
 	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 * pinNumber));
-	pGPIOHandle->pGPIOx->PUPDR = registerState;
+	pGPIOHandle->pGPIOx->PUPDR |= registerState;
 
 	// 4. configure the optype (output type)
 	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << pinNumber);
-	pGPIOHandle->pGPIOx->OTYPER = registerState;
+	pGPIOHandle->pGPIOx->OTYPER |= registerState;
 
 	// 5. configure alt functionality
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN){
-		// configure alternate functiona registers
+		// configure alternate function registers
 	}
 }
 
