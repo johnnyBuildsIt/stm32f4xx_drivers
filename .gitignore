@@ -1,0 +1,7 @@
+.settings/
+Debug/
+startup/
+.cproject
+.project
+LinkerScript.ld
+STM32F407G-DISC1.xml
