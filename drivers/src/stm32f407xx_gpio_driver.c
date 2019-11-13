@@ -26,6 +26,7 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	// 1. configure the mode of the gpio pin
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= 3){// non-interrupt mode
 		registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pinNumber));
+		pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pinNumber);// clear before setting
 		pGPIOHandle->pGPIOx->MODER |= registerState;
 	} else {
 		// interrupt mode
@@ -34,19 +35,34 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 
 	// 2. configure speed
 	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pinNumber));
+	pGPIOHandle->pGPIOx->OSPEEDR &= ~(0x3 << pinNumber);// clear before setting
 	pGPIOHandle->pGPIOx->OSPEEDR |= registerState;
 
 	// 3. configure pupd (pull up/pull down
 	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 * pinNumber));
+	pGPIOHandle->pGPIOx->PUPDR &= (0x3 << pinNumber);// clear before setting
 	pGPIOHandle->pGPIOx->PUPDR |= registerState;
 
 	// 4. configure the optype (output type)
 	registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << pinNumber);
+	pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 << pinNumber);
 	pGPIOHandle->pGPIOx->OTYPER |= registerState;
 
 	// 5. configure alt functionality
 	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN){
 		// configure alternate function registers
+		uint8_t afrLowOrHigh, afrShiftBy;
+
+		afrLowOrHigh = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber / 8;
+		afrShiftBy = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber % 8;
+
+		if(afrLowOrHigh == 1) {
+			pGPIOHandle->pGPIOx->OTYPER &= ~(0xF << (4 * afrShiftBy));// clear before setting
+			pGPIOHandle->pGPIOx->AFRH |= pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * afrShiftBy);
+		} else {
+			pGPIOHandle->pGPIOx->OTYPER &= ~(0xF << (4 * afrShiftBy));// clear before setting
+			pGPIOHandle->pGPIOx->AFRL |= pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * afrShiftBy);
+		}
 	}
 }
 
