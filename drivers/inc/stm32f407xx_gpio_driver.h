@@ -81,28 +81,3 @@ void GPIO_IRQHandling(uint8_t pinNumber);
 
 
 #endif /* INC_STM32F407XX_GPIO_DRIVER_H_ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
