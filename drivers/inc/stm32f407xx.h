@@ -125,6 +125,25 @@ typedef struct {
 	volatile uint32_t RCC_PLLI2SCFGR;
 }RCC_RegDef_t;
 
+typedef struct {
+	volatile uint32_t IMR;
+	volatile uint32_t EMR;
+	volatile uint32_t RTSTR;
+	volatile uint32_t FTSR;
+	volatile uint32_t SWIER;
+	volatile uint32_t PR;
+}EXTI_RegDef_t;
+
+
+typedef struct {
+	volatile uint32_t MEMRMP;
+	volatile uint32_t PMC;
+	volatile uint32_t EXTICR[4];
+	uint32_t 		  RESERVED0;
+	uint32_t 		  RESERVED1;
+	volatile uint32_t CMPCR;
+
+}SYSCFG_RegDef_t;
 
 /*************Peripheral Definitions***********/
 /*peripheral base addresses type casted to xxx_RegDef_t*/
@@ -143,6 +162,9 @@ typedef struct {
 
 #define RCC			((RCC_RegDef_t*) RCC_BASEADDR)
 
+#define EXTI		((EXTI_RegDef_t*) EXTI_BASEADDR)
+
+#define SYSCFG		((SYSCFG_RegDef_t*) SYSCFG_BASEADDR)
 
 /*
  * Clock enable macros for GPIOx peripherals
@@ -181,7 +203,7 @@ typedef struct {
 /*
  * Clock enable macros for SYSCFGx peripherals
  */
-
+#define SYSCFG_PCLK_EN()		(RCC->RCC_APB2ENR |= (1 << 14))
 
 
 /*
@@ -208,6 +230,15 @@ typedef struct {
 #define GPIOG_REG_RESET()		do{ (RCC->RCC_AHB1RSTR |= (1 << 6)); (RCC->RCC_AHB1RSTR &= ~(1 << 6)); }while(0)
 #define GPIOH_REG_RESET()		do{ (RCC->RCC_AHB1RSTR |= (1 << 7)); (RCC->RCC_AHB1RSTR &= ~(1 << 7)); }while(0)
 #define GPIOI_REG_RESET()		do{ (RCC->RCC_AHB1RSTR |= (1 << 8)); (RCC->RCC_AHB1RSTR &= ~(1 << 8)); }while(0)
+
+#define EXTI_GPIO_PORT_CODE(x)	((x == GPIOA)?0:\
+								 (x == GPIOB)?1:\
+								 (x == GPIOC)?2:\
+								 (x == GPIOD)?3:\
+								 (x == GPIOE)?4:\
+							     (x == GPIOF)?5:\
+							     (x == GPIOG)?6:\
+								 (x == GPIOH)?7:0)
 
 // some generic macros
 #define ENABLE 		1

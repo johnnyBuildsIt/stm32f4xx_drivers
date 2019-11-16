@@ -32,15 +32,29 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 		// interrupt mode
 		if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_FALLING_EDGE_TRIGGER) {
 			// 1. configure FTSR
+			EXTI->FTSR |= (1 << pinNumber);
+			// clear corresponding RTSR bit
+			EXTI->RTSTR &= ~(1 << pinNumber);
 		} else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_RISING_EDGE_TRIGGER) {
 			// 1. configure RTSR
+			EXTI->RTSTR |= (1 << pinNumber);
+			// clear corresponding FTSR bit
+			EXTI->FTSR &= ~(1 << pinNumber);
 		} else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_RISING_FALLING_TRIGGER) {
 			// 1. configure both FTSR and RTSR
+			EXTI->FTSR |= (1 << pinNumber);
+			EXTI->RTSTR |= (1 << pinNumber);
 		}
 
 		// 2. configure the GPIO port selection in SYSCFG_EXTICR
+		uint8_t extiRegisterIndex = pinNumber / 4;
+		uint8_t extiRegisterShiftAmt = pinNumber % 4;
+		uint8_t portCode = EXTI_GPIO_PORT_CODE(pGPIOHandle->pGPIOx);
+		SYSCFG_PCLK_EN();
+		SYSCFG->EXTICR[extiRegisterIndex] = portCode << (extiRegisterShiftAmt * 4);
 
 		// 3. enable the exti interrupt deliver using IMR(interrupt mask register)
+		EXTI->IMR |= (1 << pinNumber);
 	}
 
 	// 2. configure speed
