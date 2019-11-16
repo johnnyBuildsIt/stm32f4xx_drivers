@@ -24,13 +24,23 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	uint8_t pinNumber = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber;
 
 	// 1. configure the mode of the gpio pin
-	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= 3){// non-interrupt mode
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG){// non-interrupt mode
 		registerState = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pinNumber));
 		pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pinNumber);// clear before setting
 		pGPIOHandle->pGPIOx->MODER |= registerState;
 	} else {
 		// interrupt mode
-		// TODO implement interrupt mode
+		if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_FALLING_EDGE_TRIGGER) {
+			// 1. configure FTSR
+		} else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_RISING_EDGE_TRIGGER) {
+			// 1. configure RTSR
+		} else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_RISING_FALLING_TRIGGER) {
+			// 1. configure both FTSR and RTSR
+		}
+
+		// 2. configure the GPIO port selection in SYSCFG_EXTICR
+
+		// 3. enable the exti interrupt deliver using IMR(interrupt mask register)
 	}
 
 	// 2. configure speed
